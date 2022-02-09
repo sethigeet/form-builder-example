@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .avatar {
+    @apply flex aspect-square items-center justify-center rounded-full border-2 border-slate-800 bg-gray-100 text-2xl font-medium text-slate-800;
+  }
+}

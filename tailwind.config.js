@@ -5,6 +5,14 @@ module.exports = {
       fontFamily: {
         sans: ["Montserrat", "sans-serif"],
       },
+      colors: {
+        blue: {
+          900: "#214073",
+        },
+        slate: {
+          800: "#0E1C34",
+        },
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],
