@@ -5,14 +5,8 @@ import Head from "next/head";
 import { Formik, Form as FormikForm } from "formik";
 
 import { Header, Input, Select, Stepper, Switch } from "~/components";
-import {
-  ASSET_SUB_TYPES,
-  ASSET_TYPES,
-  FormModeOptions,
-  FormStepLabels,
-  riskDetailsSchema,
-  TRANSACTIONS,
-} from "~/lib";
+import { riskDetailsSchema } from "~/lib";
+import { FormModeOptions, FormStepLabels, FormFieldOptions } from "~/mock";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 
 const Form: NextPage = () => {
@@ -148,14 +142,14 @@ const Step3: FC<Step3Props> = ({ next, back }) => {
                     name="assetType"
                     label="Asset Type"
                     placeholder="Select asset type"
-                    options={ASSET_TYPES}
+                    options={FormFieldOptions.assetTypes}
                     className="w-56"
                   />
                   <Select
                     name="assetSubType"
                     label="Asset Sub Type"
                     placeholder="Select asset sub type"
-                    options={ASSET_SUB_TYPES}
+                    options={FormFieldOptions.assetSubTypes}
                     className="w-56"
                   />
                 </div>
@@ -218,14 +212,14 @@ const Step3: FC<Step3Props> = ({ next, back }) => {
                     name="collateralTransaction"
                     label="Collateral Transaction"
                     placeholder="Select a transation"
-                    options={TRANSACTIONS}
+                    options={FormFieldOptions.transactions}
                     className="w-56"
                   />
                   <Select
                     name="investmentTransaction"
                     label="Investment Transaction"
                     placeholder="Select a transation"
-                    options={TRANSACTIONS}
+                    options={FormFieldOptions.transactions}
                     className="w-56"
                   />
                 </div>
