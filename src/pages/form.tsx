@@ -19,6 +19,9 @@ const Form: NextPage = () => {
   const [currentMode, setCurrentMode] = useState(FormModeOptions[0].text);
   const [activeStep, setActiveStep] = useState(2);
 
+  const next = () => setActiveStep((step) => (step += 1));
+  const back = () => setActiveStep((step) => (step -= 1));
+
   return (
     <>
       <Head>
@@ -33,11 +36,23 @@ const Form: NextPage = () => {
         />
         <div className="mt-4">
           <Stepper activeStep={activeStep} labels={FormStepLabels}>
-            <div>Step 1</div>
-            <div>Step 2</div>
-            <Step3 />
-            <div>Step 4</div>
-            <div>Step 5</div>
+            <div>
+              Step 1
+              <NavigationBtns next={next} back={back} />
+            </div>
+            <div>
+              Step 2
+              <NavigationBtns next={next} back={back} />
+            </div>
+            <Step3 next={next} back={back} />
+            <div>
+              Step 4
+              <NavigationBtns next={next} back={back} />
+            </div>
+            <div>
+              Step 5
+              <NavigationBtns next={next} back={back} />
+            </div>
           </Stepper>
         </div>
       </div>
@@ -47,7 +62,32 @@ const Form: NextPage = () => {
 
 export default Form;
 
-const Step3: FC = () => {
+const NavigationBtns: FC<Step3Props> = ({ next, back }) => (
+  <div className="col-span-2 mt-4 flex">
+    <button
+      className="mr-auto flex items-center justify-center rounded-lg bg-gray-300 p-3 text-lg font-bold text-slate-800"
+      onClick={back}
+    >
+      <ChevronLeftIcon className="h-6 w-6" />
+      Back
+    </button>
+
+    <button
+      className="ml-auto flex items-center justify-center rounded-lg bg-blue-900 p-3 text-lg font-bold text-white"
+      onClick={next}
+    >
+      Next
+      <ChevronRightIcon className="h-6 w-6" />
+    </button>
+  </div>
+);
+
+interface Step3Props {
+  next: () => void;
+  back: () => void;
+}
+
+const Step3: FC<Step3Props> = ({ next, back }) => {
   return (
     <div className="mt-16 grid place-items-center">
       <div className="max-w-6xl rounded-2xl bg-gray-100 p-10">
@@ -91,7 +131,10 @@ const Step3: FC = () => {
             cusip: "",
             remarks: "",
           }}
-          onSubmit={(vals) => console.log(vals)}
+          onSubmit={(vals) => {
+            console.log(vals);
+            next();
+          }}
           validationSchema={riskDetailsSchema}
         >
           {({ values, errors }) => (
@@ -274,8 +317,8 @@ const Step3: FC = () => {
 
               <div className="col-span-2 mt-4 flex">
                 <button
-                  type="submit"
                   className="mr-auto flex items-center justify-center rounded-lg bg-gray-300 p-3 text-lg font-bold text-slate-800"
+                  onClick={back}
                 >
                   <ChevronLeftIcon className="h-6 w-6" />
                   Back

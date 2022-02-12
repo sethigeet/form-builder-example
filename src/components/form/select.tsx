@@ -84,7 +84,7 @@ export const Select: FC<SelectProps> = ({
 
           <Transition
             as={Fragment}
-            leave="transition ease-in duration-100"
+            leave="transition-opacity ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
@@ -99,7 +99,7 @@ export const Select: FC<SelectProps> = ({
                   }
                   value={value}
                 >
-                  {({ selected, active }) => (
+                  {({ selected }) => (
                     <>
                       <span
                         className={`${selected ? "font-medium" : "font-normal"} block truncate`}

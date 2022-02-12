@@ -1,5 +1,7 @@
-import { CheckIcon } from "@heroicons/react/outline";
 import { Children, FC } from "react";
+
+import { Transition } from "@headlessui/react";
+import { CheckIcon } from "@heroicons/react/outline";
 
 interface StepperProps {
   activeStep: number;
@@ -66,7 +68,21 @@ export const Stepper: FC<StepperProps> = ({ activeStep, labels, children }) => {
         })}
       </div>
 
-      <div className="mt-4">{steps[activeStep]}</div>
+      <div className="mt-4">
+        {steps.map((step, i) => (
+          <Transition
+            show={activeStep === i}
+            enter="transition-opacity duration-200 delay-200"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            {step}
+          </Transition>
+        ))}
+      </div>
     </div>
   );
 };
