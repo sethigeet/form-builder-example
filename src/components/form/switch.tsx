@@ -5,7 +5,7 @@ import { Switch as HeadlessSwitch } from "@headlessui/react";
 
 import { ArgumentTypes } from "~/lib";
 
-type SwitchProps = Partial<ArgumentTypes<typeof HeadlessSwitch>[0]> & {
+export type SwitchProps = Partial<ArgumentTypes<typeof HeadlessSwitch>[0]> & {
   name: string;
   label: string;
 };

@@ -8,14 +8,6 @@ export const FormModeOptions: ModeOption[] = [
   { text: "View", icon: ViewGridIcon },
 ];
 
-export const FormStepLabels = [
-  "Primary Details",
-  "Listing Details",
-  "Risk Details",
-  "Rating Details",
-  "Other Details",
-];
-
 // Form field options
 export const FormFieldOptions = {
   assetTypes: [

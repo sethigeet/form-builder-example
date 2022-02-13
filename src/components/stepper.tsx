@@ -78,6 +78,7 @@ export const Stepper: FC<StepperProps> = ({ activeStep, labels, children }) => {
             leave="transition-opacity duration-200"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
+            key={i}
           >
             {step}
           </Transition>

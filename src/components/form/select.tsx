@@ -11,16 +11,16 @@ import {
 
 import { ArgumentTypes } from "~/lib";
 
-interface Option {
+export interface SelectOption {
   label: string;
   value: string;
 }
 
-type SelectProps = Partial<ArgumentTypes<typeof Listbox>[0]> & {
+export type SelectProps = Partial<ArgumentTypes<typeof Listbox>[0]> & {
   name: string;
   label: string;
   placeholder?: string;
-  options: Option[];
+  options: SelectOption[];
 };
 
 export const Select: FC<SelectProps> = ({

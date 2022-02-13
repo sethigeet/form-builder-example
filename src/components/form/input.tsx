@@ -3,7 +3,10 @@ import { DetailedHTMLProps, FC, InputHTMLAttributes } from "react";
 import { useField } from "formik";
 import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/outline";
 
-type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
+export type InputProps = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+> & {
   name: string;
   label: string;
 };
