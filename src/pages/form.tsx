@@ -10,8 +10,8 @@ const Form: NextPage = () => {
   const [currentMode, setCurrentMode] = useState(FormModeOptions[0].text);
   const [activeStep, setActiveStep] = useState(2);
 
-  const next = () => setActiveStep((step) => (step += 1));
-  const back = () => setActiveStep((step) => (step -= 1));
+  const next = () => setActiveStep((step) => step + 1);
+  const back = () => setActiveStep((step) => step - 1);
 
   return (
     <>
