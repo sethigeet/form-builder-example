@@ -12,10 +12,13 @@ import {
   SelectOption,
   Switch,
   SwitchProps,
+  CompletableInputProps,
+  CompletableInput,
+  CompletableItem,
 } from "~/components/form";
 
-type FormItemType = "input" | "select" | "switch";
-type FormItemProps<T> = Omit<T, "label" | "name">;
+type FormItemType = "input" | "select" | "switch" | "completeableInput";
+type FormItemProps<T> = Omit<T, "label" | "name" | "onChange" | "value" | "items" | "options">;
 type ValidationSchema = Record<string, any>; // TODO: find a better way to type this
 type FormValues = Record<string, any>;
 
@@ -38,6 +41,11 @@ type FormItem = {
       type: "switch";
       props?: FormItemProps<SwitchProps>;
     }
+  | {
+      type: "completeableInput";
+      items: CompletableItem[];
+      props?: FormItemProps<CompletableInputProps>;
+    }
 );
 
 class FormItemBuilder {
@@ -47,6 +55,7 @@ class FormItemBuilder {
   private type: FormItemType;
   private props?: Record<string, any>;
   private options?: SelectOption[];
+  private items?: CompletableItem[];
   validation?: ValidationSchema;
 
   constructor(schema: FormItem) {
@@ -56,6 +65,8 @@ class FormItemBuilder {
     this.type = schema.type;
     if (schema.type === "select") {
       this.options = schema.options;
+    } else if (schema.type === "completeableInput") {
+      this.items = schema.items;
     }
     this.validation = schema.validation;
     this.props = schema.props;
@@ -88,6 +99,22 @@ class FormItemBuilder {
     );
   }
 
+  private getCompletableInput(): ReactElement {
+    if (!this.items) {
+      throw new Error("items is required for a form field of type 'completeableInput'");
+    }
+
+    return (
+      <CompletableInput
+        name={this.name}
+        label={this.label}
+        items={this.items}
+        {...this.props}
+        className={`w-56 ${this.props?.className || ""}`}
+      />
+    );
+  }
+
   private getSwitch(): ReactElement {
     return <Switch name={this.name} label={this.label} {...this.props} />;
   }
@@ -100,6 +127,8 @@ class FormItemBuilder {
         return this.getSelect();
       case "switch":
         return this.getSwitch();
+      case "completeableInput":
+        return this.getCompletableInput();
     }
   }
 }

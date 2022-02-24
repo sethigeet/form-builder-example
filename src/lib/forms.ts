@@ -185,7 +185,8 @@ export const SecurityMasterForms: Form[] = [
           {
             name: "searchIssuerName",
             label: "Search Issuer by name",
-            type: "input",
+            type: "completeableInput",
+            items: ["Auto complete item 1", "Auto complete item 2", "Auto complete item 3"],
             props: { placeholder: "Enter issuer name" },
             validation: yup.string().required().min(4),
           },

@@ -47,13 +47,7 @@ export const Select: FC<SelectProps> = ({
         {label}
       </label>
 
-      <Listbox
-        {...field}
-        onChange={(val) => helpers.setValue(val)}
-        {...props}
-        as="div"
-        id={field.name}
-      >
+      <Listbox {...field} onChange={helpers.setValue} {...props} as="div" id={field.name}>
         <div className="relative mt-1 w-full">
           <Listbox.Button
             className={`relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md transition-shadow duration-300 focus:outline-none ${ring} focus-visible:ring-opacity-75`}
@@ -84,12 +78,15 @@ export const Select: FC<SelectProps> = ({
 
           <Transition
             as={Fragment}
+            enter="transition ease-in duration-100"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
             leave="transition-opacity ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-slate-800 ring-opacity-5 focus:outline-none sm:text-sm">
-              {options.map(({ value, label }) => (
+              {options.map(({ label, value }) => (
                 <Listbox.Option
                   key={value}
                   className={({ active }) =>
@@ -106,11 +103,11 @@ export const Select: FC<SelectProps> = ({
                       >
                         {label}
                       </span>
-                      {selected ? (
+                      {selected && (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-900">
                           <CheckIcon className="h-5 w-5" aria-hidden="true" />
                         </span>
-                      ) : null}
+                      )}
                     </>
                   )}
                 </Listbox.Option>
